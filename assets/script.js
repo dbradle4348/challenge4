@@ -3,10 +3,11 @@ const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+var c = 200
+let countrightanswers = 0
 
 let shuffledQuestions, currentQuestionIndex
 
-let countRightAnswers = 0;
 
 
 startButton.addEventListener('click', startGame)
@@ -23,6 +24,7 @@ function startGame() {
     questionContainerElement.classList.remove('hide')
     countRightAnswers = 0
     setNextQuestion()
+    timer001()
 }
 
 
@@ -68,9 +70,9 @@ function selectAnswer(e) {
         startButton.classList.remove('hide')
     }
     if (selectedButton.dataset = correct) {
-        countRightAnswers++;
-    }
-    document.getElementById('right-answers').innerHTML = countRightAnswers;
+        countRightAnswers++
+    } 
+    localStorage.setItem("score", countRightAnswers);
 }
 
 function setStatusClass(element, correct) {
@@ -119,3 +121,27 @@ var questions = [
 
     }
 ]
+
+function timer001() {
+    c = c - 1;
+    if (c < 200) {
+        time001.innerHTML = c;
+    }
+    if (c < 1) {
+        window.clearInterval(update);
+    }
+}
+
+update = setInterval("timer001()", 1000);
+
+function repeat001() {
+    location.reload();
+}
+
+var endGame = function() {
+    //if timer runs out end game
+    if (c < 1) {
+        window.alert("Game Over! You failed.");
+        startButton.innerText = 'Restart'
+    }
+}
