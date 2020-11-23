@@ -60,6 +60,7 @@ body.wrong {
 
 .btn.correct {
     --hue: var(--hue-correct);
+    color: black
 }
 
 .btn.wrong {
@@ -81,3 +82,16 @@ body.wrong {
 .hide {
     display: none;
 }
+
+footer {
+    background: red;
+    width: auto;
+    padding: auto;
+  }
+
+  footer h1 {
+    display: inline;
+    color: white;
+    font-size: 30px;
+    margin: 0;
+  }

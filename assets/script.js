@@ -1,9 +1,12 @@
-var startButton = document.getElementById('start-btn')
-var nextButton = document.getElementById('next-btn')
-var questionContainerElement = document.getElementById('question-container')
-var questionElement = document.getElementById('question')
-var answerButtonsElement = document.getElementById('answer-buttons')
-var shuffledQuestions, currentQuestionIndex
+const startButton = document.getElementById('start-btn')
+const nextButton = document.getElementById('next-btn')
+const questionContainerElement = document.getElementById('question-container')
+const questionElement = document.getElementById('question')
+const answerButtonsElement = document.getElementById('answer-buttons')
+
+let shuffledQuestions, currentQuestionIndex
+
+let countRightAnswers = 0;
 
 
 startButton.addEventListener('click', startGame)
@@ -18,6 +21,7 @@ function startGame() {
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
+    countRightAnswers = 0
     setNextQuestion()
 }
 
@@ -63,7 +67,10 @@ function selectAnswer(e) {
         startButton.innerText = 'Restart'
         startButton.classList.remove('hide')
     }
-    nextButton.classList.remove('hide')
+    if (selectedButton.dataset = correct) {
+        countRightAnswers++;
+    }
+    document.getElementById('right-answers').innerHTML = countRightAnswers;
 }
 
 function setStatusClass(element, correct) {
@@ -74,6 +81,11 @@ function setStatusClass(element, correct) {
     else {
         element.classList.add('wrong')
     }
+}
+
+function clearStatusClass(element) {
+    element.classList.remove('correct')
+    element.classList.remove('wrong')
 }
 
 
