@@ -1,10 +1,12 @@
+//I know I didn't quite make the requirements for the assignment this time with the timer deductions and posting high scores, but here's where I tried everything. Thanks.
+
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
-var c = 200
-let countrightanswers = 0
+//
+var countrightanswers = 0
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -15,8 +17,9 @@ nextButton.addEventListener('click', () => {
     currentQuestionIndex++ 
     setNextQuestion()
 })
-
+//start the game and timer by clicking the button
 function startGame() {
+    c = 100;
     console.log('Started')
     startButton.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -27,7 +30,7 @@ function startGame() {
     timer001()
 }
 
-
+// setting up next question
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
@@ -55,6 +58,7 @@ function resetState() {
     }
 }
 
+//trying to pull score from here and post it to high score page with other JS sheet, it isn't working
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
@@ -70,7 +74,7 @@ function selectAnswer(e) {
         startButton.classList.remove('hide')
     }
     if (selectedButton.dataset = correct) {
-        countRightAnswers++
+        countRightAnswers++;
     } 
     localStorage.setItem("score", countRightAnswers);
 }
@@ -90,7 +94,7 @@ function clearStatusClass(element) {
     element.classList.remove('wrong')
 }
 
-
+//quiz questions
 var questions = [
     {
         question: 'Which of these is a type of variable in JavaScript?',
@@ -121,7 +125,7 @@ var questions = [
 
     }
 ]
-
+// timer function, trying to get it to go down by 10 seconds if answer is incorrect
 function timer001() {
     c = c - 1;
     if (c < 200) {
@@ -130,10 +134,14 @@ function timer001() {
     if (c < 1) {
         window.clearInterval(update);
     }
+    if (answer != correct) {
+        window.clearInterval(c-10)
+    }
 }
 
 update = setInterval("timer001()", 1000);
 
+//I don't think this does anything, borrowing from two different videos
 function repeat001() {
     location.reload();
 }
@@ -145,3 +153,4 @@ var endGame = function() {
         startButton.innerText = 'Restart'
     }
 }
+
